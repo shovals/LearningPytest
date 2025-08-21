@@ -24,6 +24,10 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest pytest-html
 
+      - name: Set PYTHONPATH
+        run: |
+          echo "PYTHONPATH=$PWD:$PWD/src" >> $GITHUB_ENV
+
       - name: Run tests (HTML report)
         run: |
           mkdir -p reports
