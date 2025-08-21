@@ -31,7 +31,7 @@ def test_divide_by_zero():
 def test_add_param(a, b, expected):
     assert add(a, b) == expected
 
-
+# A list of tests to run in smoke tests
 @pytest.mark.smoke
 def test_divide_normal():
     assert divide(20, 5) == 4
@@ -41,6 +41,7 @@ def test_multiply():
     assert multiply(3, 4) == 12
     assert multiply(0, 3) == 0
 
+# A list of tests to run in slow tests
 @pytest.mark.slow
 def test_divide_big_numbers():
     assert divide(1000000, 2) == 500000
