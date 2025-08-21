@@ -1,18 +1,33 @@
 name: tests
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
+
 jobs:
   pytest:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -r requirements.txt pytest-html
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -U pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest pytest-html
+
       - name: Run tests (HTML report)
         run: |
           mkdir -p reports
           pytest -v --html=reports/report.html --self-contained-html
+
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
