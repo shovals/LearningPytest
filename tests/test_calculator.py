@@ -1,6 +1,6 @@
 import pytest
 
-from src.calculator import add, multiply, divide
+from src.calculator import add, multiply, divide, power
 from tests.conftest import sample_numbers
 
 
@@ -19,6 +19,10 @@ def test_divide_by_zero():
     import pytest
     with pytest.raises(ValueError):
         divide(10, 0)
+
+def test_power():
+    assert power(2,3) == 8
+
 
 
 @pytest.mark.parametrize("a, b, expected", [
